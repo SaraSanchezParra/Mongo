@@ -6,8 +6,6 @@ const credentialsSchema = new mongoose.Schema({
   },
   phone: {
     type: Number,
-    min: 9,
-    max: 11
   },
   email: {
     type: String,
