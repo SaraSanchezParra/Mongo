@@ -132,17 +132,17 @@ let Students = mongoose.model('Students', studentsSchema);
 Students.findOne({ firstName: "María" })
   .then((student) => {
     console.log(`Todas las notas de María:`);
-    student.marks.forEach((mark) => {
+    student.marks.forEach((mark) => {  //se recorre el arreglo de notas de la propiedad marks del objeto de estudiante y se imprime cada nota y la asignatura correspondiente.
       console.log(`- ${mark.mark} en ${mark.subjects.title}`);
     });
 
     console.log(`Todas las asignaturas de María:`);
-    student.marks.forEach((mark) => {
+    student.marks.forEach((mark) => {  //se recorre el arreglo de notas de la propiedad marks del objeto de estudiante y se imprime el título de cada asignatura.
       console.log(`- ${mark.subjects.title}`);
     });
 
     console.log(`Todos los profesores de María:`);
-    student.marks.forEach((mark) => {
+    student.marks.forEach((mark) => { 
       mark.subjects.teachers.forEach((teacher) => {
         console.log(`- ${teacher.firstName} ${teacher.lastName}`);
       });
