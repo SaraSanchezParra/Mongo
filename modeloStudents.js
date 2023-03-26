@@ -93,7 +93,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     { $group: { _id: null, avgMark: { $avg: "$mark" } } } // calculamos la media de las notas
 //   ])
 //   .then(result => {
-//     const avgMark = result[0].avgMark;
+//     const avgMark = result[0].avgMark; //la función de agregación será una fila, por eso necesit ponerla a 0, para ir a la primera posición
 //     console.log(`La nota media de Heráldica es: ${avgMark}`);
 //   })
 //   .catch(error => {
