@@ -1,0 +1,26 @@
+{
+  "name": "mongo",
+  "version": "1.0.0",
+  "description": "",
+<<<<<<< HEAD
+  "main": "esquema.js",
+=======
+  "main": "datosPhotos.js",
+>>>>>>> dia2
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SaraSanchezParra/Mongo.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SaraSanchezParra/Mongo/issues"
+  },
+  "homepage": "https://github.com/SaraSanchezParra/Mongo#readme",
+  "dependencies": {
+    "mongoose": "^7.0.2"
+  }
+}
