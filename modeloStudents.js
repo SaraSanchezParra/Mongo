@@ -103,20 +103,14 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   Calcular el número total de alumnos que hay en el bootcamp incluyendo repetidos.
 
 // Marks.aggregate([
-//     {
-//       $group: {
-//         _id: null,
-//         count: { $sum: 1 }
-//       }
-//     }
-//   ]).exec()
-//     .then(result => {
-//       console.log(result[0].count); // Imprime el número de estudiantes
-//     })
-//     .catch(err => {
-//       console.log(err);
-//     });
-  
+//     { $group: { _id: null, count: { $sum: 1 } } }
+//   ])
+//   .then(result => {
+//     console.log("Número total de alumnos: " + result[0].count); // Imprime el número de estudiantes
+//   })
+//   .catch(err => {
+//     console.log(err);
+//   });
   
   
 
@@ -130,14 +124,12 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     },
 //     {
 //         $project: {
-//             _id: 0,
-//             student_first_name: "$_id.student_first_name",
-//             student_last_name: "$_id.student_last_name",
-//             count: 1
+//             _id: 0, student_first_name: "$_id.student_first_name", student_last_name: "$_id.student_last_name",
+//             count: 1  //hago que vaya contando cuántos hay
 //         }
 //     }
 // ]).then((result) => {
-//     console.log(result); // Imprime los nombres y apellidos de todos los estudiantes, incluyendo repetidos
+//     console.log(result); 
 // }).catch((err) => {
 //     console.log(err);
 // });
@@ -155,9 +147,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     {
 //         $project: {
 //             _id: 0,
-//             teacher_first_name: "$_id.teacher_first_name",
-//             teacher_last_name: "$_id.teacher_last_name",
-//             count: 1
+//             teacher_first_name: "$_id.teacher_first_name", teacher_last_name: "$_id.teacher_last_name", count: 1
 //         }
 //     }
 // ]).then((result) => {
@@ -165,15 +155,15 @@ let Marks = mongoose.model("Marks", MarksSchema);
 // }).catch((err) => {
 //     console.log(err);
 // });
+
+
 //   • Mostrar el número total de alumnos por grupo ordenados por grupo en orden inverso al alfabeto.
 
-//*Sale ID NULL
 
 // Marks.aggregate([
 //     {
 //       $group: {
-//         _id: "$group",
-//         totalStudents: { $sum: 1 }
+//         _id: "$group_name", totalStudents: { $sum: 1 }
 //       }
 //     },
 //     {
@@ -194,7 +184,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     {
 //       $group: {
 //         _id: "$subject_name",
-//         avgGrade: { $avg: "$grade" }
+//         avgGrade: { $avg: "$mark" }
 //       }
 //     },
 //     {
@@ -223,19 +213,17 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     console.log(err);
 //   });
   
+  
 
 //   • Calcular el numero de profesores que hay por cada asignatura incluyendo repetidos.
-//NO ME CUADRA
 // Marks.aggregate([
 //     {
-//       $group: {
-//         _id: { subject_name: "$subject_name", teacher: "$teacher" }
-//       }
+//       $unwind: "$teachers" // descomponemos el array de "teachers"
 //     },
 //     {
 //       $group: {
-//         _id: "$_id.subject_name",
-//         count: { $sum: 1 }
+//         _id: { subject_name: "$subject_name", teacher: "$teachers" },
+//         count: { $sum: 1 } // contamos la cantidad de documentos que se agrupan
 //       }
 //     }
 //   ]).then(result => {
@@ -243,4 +231,21 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   }).catch(err => {
 //     console.log(err);
 //   });
+// Marks.aggregate([
+//     {
+//       $unwind: "$teachers" // descomponemos el array de "teachers"
+//     },
+//     {
+//       $group: {
+//         _id: { subject_name: "$subject_name", teacher: { $concat: [ "$teachers.teacher_first_name", " ", "$teachers.teacher_last_name" ] } },
+//         count: { $sum: 1 } // contamos la cantidad de documentos que se agrupan
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
+  
+  
   
