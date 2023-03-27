@@ -111,7 +111,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   });
 
 
-//   • Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos. ///* CAMBIAR
+//   • Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos. ///* CAMBIAR//HECHO NO SALEN REPETIDOS
 // Marks.aggregate([
 //     {
 //         $group: {
@@ -127,25 +127,25 @@ let Marks = mongoose.model("Marks", MarksSchema);
 // });
 
 
-//   • Listar el nombre y los apellidos de todos los profesores incluyendo repetidos. //**CAMBIAR */
-// Teacher.aggregate([
+//   • Listar el nombre y los apellidos de todos los profesores incluyendo repetidos. //**CAMBIAR */ HECHO
+// Marks.aggregate([
 //     {
-//         $group: {
-//             _id: { teacher_first_name: "$teacher_first_name", teacher_last_name: "$teacher_last_name" },
-//             count: { $sum: 1 }
-//         }
+//       $unwind: "$teachers"
 //     },
 //     {
-//         $project: {
-//             _id: 0,
-//             teacher_first_name: "$_id.teacher_first_name", teacher_last_name: "$_id.teacher_last_name", count: 1
-//         }
-//     }
-// ]).then((result) => {
-//     console.log(result); // Imprime los nombres y apellidos de todos los profesores, incluyendo repetidos
-// }).catch((err) => {
+//       $group: {
+//         _id: { 
+//           teacher_first_name: "$teachers.teacher_first_name", teacher_last_name: "$teachers.teacher_last_name"},
+//       }
+//     },
+//   ])
+//   .then((result) => {
+//     console.log(result); 
+//   })
+//   .catch((err) => {
 //     console.log(err);
-// });
+//   });
+  
 
 
 //   • Mostrar el número total de alumnos por grupo ordenados por grupo en orden inverso al alfabeto.
@@ -202,15 +202,16 @@ let Marks = mongoose.model("Marks", MarksSchema);
   
   
 
-//   • Calcular el numero de profesores que hay por cada asignatura incluyendo repetidos.//MODIFICAR*********
+//   • Calcular el numero de profesores que hay por cada asignatura incluyendo repetidos.//MODIFICAR***//HECHO
+
 // Marks.aggregate([
 //     {
-//       $unwind: "$teachers" // descomponemos el array de "teachers"
+//       $unwind: "$teachers" 
 //     },
 //     {
 //       $group: {
 //         _id: { subject_name: "$subject_name", teacher: { $concat: [ "$teachers.teacher_first_name", " ", "$teachers.teacher_last_name" ] } },
-//         count: { $sum: 1 } // contamos la cantidad de documentos que se agrupan
+//         count: { $sum: 1 } 
 //       }
 //     }
 //   ]).then(result => {
@@ -218,6 +219,8 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   }).catch(err => {
 //     console.log(err);
 //   });
+
+
 // Obtén el nombre, apellido y la nota de los alumnos que tengan una nota mayor de 8 o la nota
 // tenga fecha del año pasado o anterior. //MODIFUCAR FECHA
 // Marks.find({
