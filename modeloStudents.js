@@ -131,8 +131,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     console.log(err);
 // });
 
-  
-  
+
 //   • Listar el nombre y los apellidos de todos los profesores incluyendo repetidos.
 // Teacher.aggregate([
 //     {
