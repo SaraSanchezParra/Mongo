@@ -10,7 +10,6 @@ const TeacherSchema = new mongoose.Schema({
 
     teacher_first_name: String,
     teacher_last_name: String,
-   
 })
 
 const MarksSchema = new mongoose.Schema({   
@@ -22,7 +21,6 @@ const MarksSchema = new mongoose.Schema({
     group_name: String,
     subject_name: String,
     teachers : [TeacherSchema]
-
 })
 
 let Teacher = mongoose.model("Teacher", TeacherSchema);
@@ -111,8 +109,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   .catch(err => {
 //     console.log(err);
 //   });
-  
-  
+
 
 //   • Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos.
 // Marks.aggregate([
