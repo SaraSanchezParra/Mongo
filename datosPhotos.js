@@ -16,34 +16,34 @@ let Photos = require ("./photosSquema");
 mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdbx.mongodb.net/Photos', {useNewUrlParser: false, useUnifiedTopology: false})
 
 
-let usuarios = [
-    { 
-        usuario: "Juan",
-        url: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Juan_Darth%C3%A9s_.png",
-        titulo: "Sonriendo",
-        descripcion: "Foto de perfil"
-    },
-    { 
-        usuario: "María",
-        url: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Maria_Perez.jpg",
-        titulo: "En la playa",
-        descripcion: "Vacaciones de verano"
-    },
-    { 
-        usuario: "Pedro",
-        url: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Pedro_Rodriguez.jpg",
-        titulo: "Con mi mascota",
-        descripcion: "Mi perro favorito"
-    }
-];
+// let usuarios = [
+//     { 
+//         usuario: "Juan",
+//         url: "https://upload.wikimedia.org/wikipedia/commons/b/b7/Juan_Darth%C3%A9s_.png",
+//         titulo: "Sonriendo",
+//         descripcion: "Foto de perfil"
+//     },
+//     { 
+//         usuario: "María",
+//         url: "https://upload.wikimedia.org/wikipedia/commons/9/9c/Maria_Perez.jpg",
+//         titulo: "En la playa",
+//         descripcion: "Vacaciones de verano"
+//     },
+//     { 
+//         usuario: "Pedro",
+//         url: "https://upload.wikimedia.org/wikipedia/commons/1/1e/Pedro_Rodriguez.jpg",
+//         titulo: "Con mi mascota",
+//         descripcion: "Mi perro favorito"
+//     }
+// ];
 
-Photos.insertMany(usuarios)
-.then(function(docs) {
-    console.log("Usuarios insertados:", docs.length);
-})
-.catch(function(err) {
-    console.error(err);
-});
+// Photos.insertMany(usuarios)
+// .then(function(docs) {
+//     console.log("Usuarios insertados:", docs.length);
+// })
+// .catch(function(err) {
+//     console.error(err);
+// });
 
 
 // • Obtener fotos:
