@@ -292,23 +292,23 @@ let Marks = mongoose.model("Marks", MarksSchema);
 // • Obtén los nombres de los alumnos y la cantidad total de asignaturas por alumno cuyo profesor
 // sea uno que elijáis.
 
-Marks.aggregate([
-    {
-      $unwind: "$teachers" 
-    },
-    {
-      $match: {
-        "teachers.teacher_first_name": "Melisandre" 
-      }
-    },
-    {
-      $group: {
-        _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" }, count: { $sum: 1 } 
-      }
-    }
-  ]).then(result => {
-    console.log(result);
-  }).catch(err => {
-    console.log(err);
-  });
+// Marks.aggregate([
+//     {
+//       $unwind: "$teachers" 
+//     },
+//     {
+//       $match: {
+//         "teachers.teacher_first_name": "Melisandre" 
+//       }
+//     },
+//     {
+//       $group: {
+//         _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" }, count: { $sum: 1 } 
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
   
