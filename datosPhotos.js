@@ -80,7 +80,7 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 //         return fotos;
 //       })
 //       .catch(function(error) {
-//         console.error(`Error al obtener las fotos del usuario ${usuario}: ${error}`);
+//         console.error(error);
 //         throw error;
 //       });
 //   }
@@ -92,7 +92,7 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 
 // function modificarDescripcion(tituloActual, descripcionActual, nuevaDescripcion){
 
-// Photos.updateOne()
+// Photos.updateOne(tituloActual:, descripcionActual, nuevaDescripcion)
 //   .then(result => {
 //     console.log(`Se ha modificado la descripción de la foto con título '${tituloActual}'`);
 //   })
