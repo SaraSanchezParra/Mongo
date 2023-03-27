@@ -10,7 +10,6 @@ const TeacherSchema = new mongoose.Schema({
 
     teacher_first_name: String,
     teacher_last_name: String,
-   
 })
 
 const MarksSchema = new mongoose.Schema({   
@@ -22,7 +21,6 @@ const MarksSchema = new mongoose.Schema({
     group_name: String,
     subject_name: String,
     teachers : [TeacherSchema]
-
 })
 
 let Teacher = mongoose.model("Teacher", TeacherSchema);
@@ -111,8 +109,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   .catch(err => {
 //     console.log(err);
 //   });
-  
-  
+
 
 //   • Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos.
 // Marks.aggregate([
@@ -134,8 +131,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     console.log(err);
 // });
 
-  
-  
+
 //   • Listar el nombre y los apellidos de todos los profesores incluyendo repetidos.
 // Teacher.aggregate([
 //     {
@@ -177,14 +173,12 @@ let Marks = mongoose.model("Marks", MarksSchema);
   
 //   • Obtén el top 5 de los nombres de las asignaturas cuya nota media sea mayor que 5.
 
-//*ME devuelve un array vacio
 
 
 // Marks.aggregate([
 //     {
 //       $group: {
-//         _id: "$subject_name",
-//         avgGrade: { $avg: "$mark" }
+//         _id: "$subject_name", avgGrade: { $avg: "$mark" }
 //       }
 //     },
 //     {
@@ -202,9 +196,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     },
 //     {
 //       $project: {
-//         _id: 0,
-//         subject: "$_id",
-//         avgGrade: 1
+//         _id: 0, subject: "$_id", avgGrade: 1
 //       }
 //     }
 //   ]).then(result => {
@@ -222,21 +214,6 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     },
 //     {
 //       $group: {
-//         _id: { subject_name: "$subject_name", teacher: "$teachers" },
-//         count: { $sum: 1 } // contamos la cantidad de documentos que se agrupan
-//       }
-//     }
-//   ]).then(result => {
-//     console.log(result);
-//   }).catch(err => {
-//     console.log(err);
-//   });
-// Marks.aggregate([
-//     {
-//       $unwind: "$teachers" // descomponemos el array de "teachers"
-//     },
-//     {
-//       $group: {
 //         _id: { subject_name: "$subject_name", teacher: { $concat: [ "$teachers.teacher_first_name", " ", "$teachers.teacher_last_name" ] } },
 //         count: { $sum: 1 } // contamos la cantidad de documentos que se agrupan
 //       }
@@ -246,6 +223,92 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   }).catch(err => {
 //     console.log(err);
 //   });
+// Obtén el nombre, apellido y la nota de los alumnos que tengan una nota mayor de 8 o la nota
+// tenga fecha del año pasado o anterior.
+// Marks.find({
+//     $or: [
+//       { mark: { $gt: 8 } },
+//       { date: { $lt: new Date("2022-01-01") } }
+//     ]
+//   }, {
+//     student_first_name: 1, student_last_name: 1, mark: 1, _id: 0
+//   }).then((result) => {
+//     console.log(result);
+//   }).catch((err) => {
+//     console.log(err);
+//   });
+  
+
+
+// • Obtén la media de las notas que se han dado en el último año por asignatura.
+// Marks.aggregate([
+//     {
+//       $match: {
+//         date: { $gte: new Date("2022-01-01") }
+//       }
+//     },
+//     {
+//       $group: {
+//         _id: "$subject_name", avgMark: { $avg: "$mark" } 
+//       }
+//     },
+//     {
+//       $project: {
+//         _id: 0, subject_name: "$_id", avgMark: 1
+//       }
+//     }
+//   ])
+//   .then(result => {
+//     console.log("Media de notas por asignatura en el último año:" );
+//     console.log(result);
+//   })
+//   .catch(error => {
+//     console.error(error);
+//   });
   
   
+
+// • Obtén la media aritmética de las notas que se han dado en el último año por nombre de alumno.
+// Marks.aggregate([
+//     {
+//       $match: {
+//         date: {
+//             $gte: new Date("2022-01-01") // fecha del primer día del año pasado
+//         }
+//       }
+//     },
+//     {
+//       $group: {
+//         _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" },
+//         avgMark: { $avg: "$mark" }
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
+  
+// • Obtén los nombres de los alumnos y la cantidad total de asignaturas por alumno cuyo profesor
+// sea uno que elijáis.
+
+// Marks.aggregate([
+//     {
+//       $unwind: "$teachers" 
+//     },
+//     {
+//       $match: {
+//         "teachers.teacher_first_name": "Melisandre" 
+//       }
+//     },
+//     {
+//       $group: {
+//         _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" }, count: { $sum: 1 } 
+//       }
+//     }
+//   ]).then(result => {
+//     console.log(result);
+//   }).catch(err => {
+//     console.log(err);
+//   });
   
