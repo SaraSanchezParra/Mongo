@@ -45,48 +45,76 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 //     console.error(err);
 // });
 
+//Dado un usuario, url de foto, titulo y descripción se debe guardar en la colección ‘photos’.
+
+// function guardarFotoEnColeccion(usuario, url, titulo, descripcion) {
+//     const nuevaFoto = new Photos({
+//       usuario: usuario,
+//       url: url,
+//       titulo: titulo,
+//       descripcion: descripcion
+//     });
+  
+//     return nuevaFoto.save()
+//       .then(function(resultado) {
+//         console.log(`Se ha guardado la foto con el ID: ${resultado._id}`);
+//         return resultado._id;
+//       })
+//       .catch(function(error) {
+//         console.error(`Error al guardar la foto: ${error}`);
+//         throw error;
+//       });
+//   }
+  
+// guardarFotoEnColeccion('Belén', 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Belén_Darth%C3%A9s_…', 'En París', 'Con la torre Eiffel')
+
+  
 
 // • Obtener fotos:
 // Dado un usuario obtener todas sus fotos.
 
-// const findPhotos = () => {
-//     return Photos.find({ usuario: "Juan" }).exec();
-//   };
-  
-//   findPhotos()
-//     .then((photos) => {
-//       console.log(photos);
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//     });
-  
+// function obtenerFotosDeUsuario(usuario) {
+//     return Photos.find({ usuario: usuario })
+//       .then(function(fotos) {
+//         console.log(`Se han encontrado ${fotos.length} fotos para el usuario ${usuario}`);
+//         return fotos;
+//       })
+//       .catch(function(error) {
+//         console.error(`Error al obtener las fotos del usuario ${usuario}: ${error}`);
+//         throw error;
+//       });
+//   }
+// obtenerFotosDeUsuario('Belén')
 
 //Modificar fotos:
 //Dado el titulo de una foto y una descripción modificar su descripción.
 
 
+// function modificarDescripcion(tituloActual, descripcionActual, nuevaDescripcion){
 
-// const nuevaDescripcion = 'Nueva descripción de la foto';
-
-// Photos.updateOne({ titulo: 'Sonriendo' }, { descripcion: nuevaDescripcion })
+// Photos.updateOne()
 //   .then(result => {
-//     console.log(`Se ha modificado la descripción de la foto con título '${titulo}'`);
+//     console.log(`Se ha modificado la descripción de la foto con título '${tituloActual}'`);
 //   })
 //   .catch(error => {
 //     console.error('Error al modificar la descripción de la foto:', error);
-//   });
-
+//   })
+// }
+//  modificarDescripcion('Sonriendo', 'Foto de perfil', "Me he ido a Asturias")
 
 //Borrar una foto
 
-// Photos.deleteOne({ usuario: 'Juan', titulo: 'Sonriendo' })
-//   .then(function(result) {
-//     console.log('Foto eliminada:', result);
-//   })
-//   .catch(function(err) {
-//     console.error(err);
-//   });
+// function borrarFoto(descripcion) {
+//      return Photos.deleteOne()
+//       .then(function(result) {
+//         console.log('Foto eliminada:', result);
+//       })
+//       .catch(function(err) {
+//         console.error(err);
+//       })
+// }
+
+// borrarFoto('sonriendo')
 
 //Borrar todas
 
