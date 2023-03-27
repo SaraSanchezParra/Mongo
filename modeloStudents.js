@@ -178,8 +178,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 // Marks.aggregate([
 //     {
 //       $group: {
-//         _id: "$subject_name",
-//         avgGrade: { $avg: "$mark" }
+//         _id: "$subject_name", avgGrade: { $avg: "$mark" }
 //       }
 //     },
 //     {
@@ -197,9 +196,7 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //     },
 //     {
 //       $project: {
-//         _id: 0,
-//         subject: "$_id",
-//         avgGrade: 1
+//         _id: 0, subject: "$_id", avgGrade: 1
 //       }
 //     }
 //   ]).then(result => {
