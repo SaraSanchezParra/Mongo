@@ -3,12 +3,9 @@ const router = Router();
 const photosCtrl = require("../controller/photos.controller");
 
 
-
-router.get("/", photosCtrl.getStart);
-router.get("/photos", photosCtrl.getBook);
-router.get("/photos", photosCtrl.getAllBooks);
-router.post("/photos", photosCtrl.postBook);
-router.put("/photos", photosCtrl.putBook);
-router.delete("/photos", photosCtrl.deleteBook);
+router.get("/photos", photosCtrl.getPhotos);
+router.post("/photos", photosCtrl.postPhotos);
+router.put("/photos", photosCtrl.putPhotos);
+router.delete("/photos", photosCtrl.deletePhotos);
 
 module.exports = router;
