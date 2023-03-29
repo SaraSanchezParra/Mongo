@@ -114,10 +114,9 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //   • Listar el nombre y los apellidos de todos los alumnos incluyendo repetidos. ///* CAMBIAR//HECHO NO SALEN REPETIDOS
 // Marks.aggregate([
 //     {
-//         $group: {
-//             _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" },
+//         $project: 
+//             { "Nombre": "$student_first_name", "Apellido": "$student_last_name", _id: 0},
 
-//         }
 //     },
     
 // ]).then((result) => {
@@ -133,10 +132,9 @@ let Marks = mongoose.model("Marks", MarksSchema);
 //       $unwind: "$teachers"
 //     },
 //     {
-//       $group: {
-//         _id: { 
-//           teacher_first_name: "$teachers.teacher_first_name", teacher_last_name: "$teachers.teacher_last_name"},
-//       }
+//         $project: { 
+//           "Nombre del profesor": "$teachers.teacher_first_name", "Apellido del profesor": "$teachers.teacher_last_name"},
+      
 //     },
 //   ])
 //   .then((result) => {
@@ -285,23 +283,23 @@ let Marks = mongoose.model("Marks", MarksSchema);
 // • Obtén los nombres de los alumnos y la cantidad total de asignaturas por alumno cuyo profesor
 // sea uno que elijáis.
 
-// Marks.aggregate([
-//     {
-//       $unwind: "$teachers" 
-//     },
-//     {
-//       $match: {
-//         "teachers.teacher_first_name": "Melisandre", "teachers.teacher_last_name": "R'hllor"
-//       }
-//     },
-//     {
-//       $group: {
-//         _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" }, count: { $sum: 1 } 
-//       }
-//     }
-//   ]).then(result => {
-//     console.log(result);
-//   }).catch(err => {
-//     console.log(err);
-//   });
+Marks.aggregate([
+    {
+      $unwind: "$teachers" 
+    },
+    {
+      $match: {
+        "teachers.teacher_first_name": "Melisandre", "teachers.teacher_last_name": "R'hllor"
+      }
+    },
+    {
+      $group: {
+        _id: { student_first_name: "$student_first_name", student_last_name: "$student_last_name" }, count: { $sum: 1 } 
+      }
+    }
+  ]).then(result => {
+    console.log(result);
+  }).catch(err => {
+    console.log(err);
+  });
   
