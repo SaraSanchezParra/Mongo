@@ -66,7 +66,7 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 //       });
 //   }
   
-// guardarFotoEnColeccion('Belén', 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Belén_Darth%C3%A9s_…', 'En París', 'Con la torre Eiffel')
+// guardarFotoEnColeccion('Estefanía', 'https://upload.wikimedia.org/wikipedia/commons/b/b7/Belén_Darth%C3%A9s_…', 'En Codenotch', 'Con el portátil')
 
   
 
@@ -90,9 +90,9 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 //Dado el titulo de una foto y una descripción modificar su descripción.
 
 
-// function modificarDescripcion(tituloActual, descripcionActual, nuevaDescripcion){
+// function modificarDescripcion(tituloActual, nuevaDescripcion){
 
-// Photos.updateOne(tituloActual:, descripcionActual, nuevaDescripcion)
+// Photos.updateOne({titulo: tituloActual}, {descripcion: nuevaDescripcion})
 //   .then(result => {
 //     console.log(`Se ha modificado la descripción de la foto con título '${tituloActual}'`);
 //   })
@@ -100,21 +100,21 @@ mongoose.connect('mongodb+srv://saravsanchezparra:SaraSanchez@sarasanchez.db6gdb
 //     console.error('Error al modificar la descripción de la foto:', error);
 //   })
 // }
-//  modificarDescripcion('Sonriendo', 'Foto de perfil', "Me he ido a Asturias")
+//  modificarDescripcion("Sonriendo", "Me he ido a Asturias")
 
 //Borrar una foto
 
-// function borrarFoto(descripcion) {
-//      return Photos.deleteOne()
-//       .then(function(result) {
-//         console.log('Foto eliminada:', result);
-//       })
-//       .catch(function(err) {
-//         console.error(err);
-//       })
-// }
+function borrarFoto(descripcion) {
+     return Photos.deleteOne()
+      .then(function(result) {
+        console.log('Foto eliminada:', result);
+      })
+      .catch(function(err) {
+        console.error(err);
+      })
+}
 
-// borrarFoto('sonriendo')
+borrarFoto('sonriendo')
 
 //Borrar todas
 
